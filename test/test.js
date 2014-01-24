@@ -91,11 +91,16 @@
       root.addEventListener || (root.addEventListener = noop),
       root.setTimeout || (root.setTimeout = noop),
       root.QUnit = load('../vendor/qunit/qunit/qunit.js') || root.QUnit,
-      (load('../vendor/qunit-extras/qunit-extras.js') || { 'runInContext': noop }).runInContext(root),
       addEventListener === noop && delete root.addEventListener,
       root.QUnit
     );
   }());
+
+  /** Load and install QUnit Extras */
+  if (load) {
+    var qa = load('../vendor/qunit-extras/qunit-extras.js');
+    qa.runInContext(root);
+  }
 
   /*--------------------------------------------------------------------------*/
 
